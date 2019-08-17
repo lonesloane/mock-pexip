@@ -1,5 +1,7 @@
 from flask import Flask, jsonify, abort, request, make_response
 
+import init
+
 app = Flask(__name__)
 
 
@@ -63,4 +65,13 @@ def room_available(room_number):
 
 
 if __name__ == '__main__':
-    app.run(host='vd-w2k16-dev-10.main.oecd.org', port=8085, debug=True)
+    host = init.PEXIP_SERVICE_HOST
+    port = init.PEXIP_SERVICE_PORT
+
+    init.logger.info('=' * 20)
+    init.logger.info('Starting mock-pexip with parameters:')
+    init.logger.info('PEXIP_SERVICE_HOST: {}'.format(init.PEXIP_SERVICE_HOST))
+    init.logger.info('PEXIP_SERVICE_PORT: {}'.format(init.PEXIP_SERVICE_PORT))
+    init.logger.info('=' * 20)
+
+    app.run(host=host, port=int(port), debug=True)
